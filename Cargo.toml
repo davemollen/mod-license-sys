@@ -1,0 +1,13 @@
+[package]
+name = "mod-license-sys"
+version = "0.1.0"
+authors = ["davemollen <davemollen@gmail.com>"]
+edition = "2021"
+exclude = ["include", "tool"]
+
+[dependencies]
+
+[workspace]
+members = [
+    "tool"
+]

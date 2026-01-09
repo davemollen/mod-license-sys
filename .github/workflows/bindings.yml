@@ -1,0 +1,29 @@
+name: Generate bindings
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  linux-bindings:
+    name: Generate linux bindings
+    runs-on: ubuntu-22.04-arm
+    strategy:
+      matrix:
+        target: [aarch64-unknown-linux-gnu]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Generate bindings
+        run: |
+          mkdir bindings
+          cargo systool --out bindings.rs
+      - uses: actions/upload-artifact@v6
+        with:
+          name: bindings
+          path: bindings
